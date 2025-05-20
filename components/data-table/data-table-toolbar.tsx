@@ -1,6 +1,6 @@
 "use client";
 
-import { XCircleIcon } from "lucide-react";
+import { XIcon } from "lucide-react";
 import type { Table } from "@tanstack/react-table";
 import { Search } from "lucide-react";
 
@@ -33,44 +33,42 @@ export function DataTableToolbar<TData>({
     table.getState().columnFilters.length > 0 || globalFilter !== "";
 
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <div className="relative w-full sm:w-auto">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+    <div className="flex flex-wrap items-center justify-between gap-2">
+      <div className="flex flex-1 items-center space-x-2">
+        <div className="relative w-full md:w-auto">
+          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search all columns..."
             value={globalFilter}
             onChange={(event) => setGlobalFilter(event.target.value)}
-            className="w-full pl-9 sm:w-[250px] md:w-[300px] lg:w-[400px] focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="w-full pl-8 md:w-[300px] lg:w-[400px]"
           />
         </div>
-        <div className="flex flex-wrap gap-2">
-          {filterableColumns.length > 0 &&
-            filterableColumns.map(
-              (column) =>
-                table.getColumn(column.id) && (
-                  <DataTableFacetedFilter
-                    key={column.id}
-                    column={table.getColumn(column.id)}
-                    title={column.title}
-                    options={column.options}
-                  />
-                )
-            )}
-          {isFiltered && (
-            <Button
-              variant="ghost"
-              onClick={() => {
-                table.resetColumnFilters();
-                setGlobalFilter("");
-              }}
-              className="h-8 px-2 lg:px-3 hover:bg-muted"
-            >
-              Reset
-              <XCircleIcon className="ml-2 h-4 w-4" />
-            </Button>
+        {filterableColumns.length > 0 &&
+          filterableColumns.map(
+            (column) =>
+              table.getColumn(column.id) && (
+                <DataTableFacetedFilter
+                  key={column.id}
+                  column={table.getColumn(column.id)}
+                  title={column.title}
+                  options={column.options}
+                />
+              )
           )}
-        </div>
+        {isFiltered && (
+          <Button
+            variant="ghost"
+            onClick={() => {
+              table.resetColumnFilters();
+              setGlobalFilter("");
+            }}
+            className="h-8 px-2 lg:px-3"
+          >
+            Reset
+            <XIcon className="ml-2 h-4 w-4" />
+          </Button>
+        )}
       </div>
       <DataTableViewOptions table={table} />
     </div>
