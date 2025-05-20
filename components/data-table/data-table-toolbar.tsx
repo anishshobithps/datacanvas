@@ -1,8 +1,7 @@
 "use client";
 
-import { XIcon } from "lucide-react";
 import type { Table } from "@tanstack/react-table";
-import { Search } from "lucide-react";
+import { Search, XIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
