@@ -159,9 +159,6 @@ export default function ProductsPage() {
           },
         ]}
       />
-      <div className="mt-6 text-sm text-muted-foreground">
-        Showing {products.length} of {pagination.total} products
-      </div>
     </div>
   );
 }
