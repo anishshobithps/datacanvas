@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Advanced Table View",
+  title: "Data Canvas",
   description:
-    "Explore an advanced data table with smart filtering, sorting, and pagination. Built with Next.js, Tailwind CSS, and TanStack Table.",
+    "A modern, interactive data visualization solution built with Next.js 15 and React 19.",
 };
 
 export default function RootLayout({

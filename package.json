@@ -1,5 +1,6 @@
 {
-  "name": "interactive-table",
+  "name": "datacanvas",
+  "description": "A modern, interactive data visualization solution built with Next.js 15 and React 19.",
   "version": "0.1.0",
   "private": true,
   "scripts": {
