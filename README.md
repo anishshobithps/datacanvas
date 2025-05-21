@@ -19,3 +19,91 @@
 - **Development**: Turbopack for fast refresh
 - **Type Safety**: TypeScript
 
+## Setup Instructions
+
+### Prerequisites
+- Node.js (v22.15.1 or higher)
+- Git
+- pnpm
+
+### Getting Started
+<p> 1. <strong>Clone the repository</strong>: Clone this repository to your local machine using the following command: </p>
+
+```bash
+git@github.com:anishshobithps/datacanvas.git
+```
+<p> 2. Change into the project directory: </p>
+
+```bash
+cd datacanvas
+```
+<p> 3. Install the dependencies: </p>
+
+```bash
+pnpm install
+```
+<p> 4. Start the development server: </p>
+
+```bash
+pnpm dev
+```
+> [!NOTE]
+> The application will be available at http://localhost:3000
+
+## Project Structure
+The application follows a modular architecture with clear separation of concerns:
+
+- `app/`: Next.js App Router pages and layouts
+- `components/`: Reusable UI components
+    - `data-table/`: Core table components
+    - `ui/`: Base UI elements
+- `lib/`: Utilities and type definitions
+
+## Data Flow Diagram
+
+```mermaid
+flowchart TD  
+    A["Client Data Source"] --> B["DataTable Props"]  
+      
+    subgraph "DataTable State"  
+        C["Sorting State"]  
+        D["Column Filters State"]  
+        E["Column Visibility State"]  
+        F["Row Selection State"]  
+        G["Global Filter State"]  
+    end  
+      
+    B --> H["TanStack Table Instance"]  
+      
+    H --> C  
+    H --> D  
+    H --> E  
+    H --> F  
+    H --> G  
+      
+    C <--> J["DataTableColumnHeader"]  
+    D <--> K["DataTableFacetedFilter"]  
+    E <--> L["DataTableViewOptions"]  
+    G <--> M["Global Search Input"]  
+      
+    H --> N["Processed Table Data"]  
+      
+    N --> O["Rendered Table Rows"]  
+      
+    P["DataTablePagination"] <--> H  
+```
+
+## Integration Overview Diagram
+
+```mermaid
+flowchart TD  
+    A["Application Page"] -->|"Imports"| B["DataTable Component"]  
+    A -->|"Defines"| C["Column Definitions"]  
+    A -->|"Fetches"| D["Data Source/API"]  
+    D -->|"Returns"| E["Raw Data"]  
+    E -->|"Transformed into"| F["Table Data"]  
+    F -->|"Passed to"| B  
+    C -->|"Passed to"| B  
+    A -->|"Optionally Defines"| G["Filterable Columns"]  
+    G -->|"Passed to"| B  
+```
