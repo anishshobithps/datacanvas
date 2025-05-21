@@ -38,7 +38,7 @@ export default function RootLayout({
           <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container mx-auto px-4 py-4 flex items-center justify-between">
               <h1 className="text-lg font-bold tracking-tight">
-                Advanced Table View
+                Data Canvas
               </h1>
               <ThemeToggle />
             </div>
