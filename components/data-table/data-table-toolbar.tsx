@@ -32,8 +32,8 @@ export function DataTableToolbar<TData>({
     table.getState().columnFilters.length > 0 || globalFilter !== "";
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-2">
-      <div className="flex flex-1 items-center space-x-2">
+    <div className="flex flex-wrap items-center gap-2 justify-between">
+      <div className="flex flex-wrap items-center gap-2">
         <div className="relative w-full md:w-auto">
           <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -43,6 +43,7 @@ export function DataTableToolbar<TData>({
             className="w-full pl-8 md:w-[300px] lg:w-[400px]"
           />
         </div>
+
         {filterableColumns.length > 0 &&
           filterableColumns.map(
             (column) =>
@@ -55,6 +56,9 @@ export function DataTableToolbar<TData>({
                 />
               )
           )}
+
+        <DataTableViewOptions table={table} />
+
         {isFiltered && (
           <Button
             variant="ghost"
@@ -69,7 +73,6 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
-      <DataTableViewOptions table={table} />
     </div>
   );
 }

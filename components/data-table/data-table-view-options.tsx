@@ -26,13 +26,13 @@ export function DataTableViewOptions<TData>({
         <Button
           variant="outline"
           size="sm"
-          className="ml-auto h-8 flex items-center gap-2 hover:bg-muted focus-visible:ring-2 focus-visible:ring-offset-2"
+          className="h-8 px-3 flex items-center gap-2 whitespace-nowrap"
         >
-          <Settings2 className="h-4 w-4" />
-          <span className="hidden sm:inline-block">View</span>
+          <Settings2 className="h-4 w-4 shrink-0" />
+          <span className="text-sm font-medium">View</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[180px] p-2">
+      <DropdownMenuContent align="start" className="w-[200px] p-2">
         <DropdownMenuLabel className="font-semibold text-sm">
           Toggle columns
         </DropdownMenuLabel>
@@ -43,18 +43,16 @@ export function DataTableViewOptions<TData>({
             (column) =>
               typeof column.accessorFn !== "undefined" && column.getCanHide()
           )
-          .map((column) => {
-            return (
-              <DropdownMenuCheckboxItem
-                key={column.id}
-                className="capitalize py-1.5 cursor-pointer"
-                checked={column.getIsVisible()}
-                onCheckedChange={(value) => column.toggleVisibility(!!value)}
-              >
-                {column.id}
-              </DropdownMenuCheckboxItem>
-            );
-          })}
+          .map((column) => (
+            <DropdownMenuCheckboxItem
+              key={column.id}
+              className="capitalize py-1.5 cursor-pointer"
+              checked={column.getIsVisible()}
+              onCheckedChange={(value) => column.toggleVisibility(!!value)}
+            >
+              {column.id}
+            </DropdownMenuCheckboxItem>
+          ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

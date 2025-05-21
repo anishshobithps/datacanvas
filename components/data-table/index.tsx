@@ -16,6 +16,7 @@ import {
 } from "@tanstack/react-table";
 import * as React from "react";
 
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -65,6 +66,13 @@ export function DataTable<TData, TValue>({
       globalFilter,
     },
     enableRowSelection: true,
+    enableMultiSort: true,
+    enableSortingRemoval: true,
+    maxMultiSortColCount: 5, // Allow up to 5 columns to be sorted
+    isMultiSortEvent: () => {
+      // Always allow multi-sort through dropdown menu options
+      return false;
+    },
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -86,8 +94,30 @@ export function DataTable<TData, TValue>({
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}
       />
-      <div className="rounded-md border">
-        <Table>
+      
+      {/* Multi-sort indicator */}
+      {sorting.length > 1 && (
+        <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 p-2 rounded-md">
+          <span className="font-medium">Sorted by:</span>
+          {sorting.map((sort, index) => (
+            <span key={sort.id} className="flex items-center gap-1">
+              <span className="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-medium">
+                {sort.id} {sort.desc ? "↓" : "↑"}
+              </span>
+              {index < sorting.length - 1 && <span>→</span>}
+            </span>
+          ))}
+          <Button
+            onClick={() => setSorting([])}
+            className="ml-auto cursor-pointer"
+          >
+            Clear all sorts
+          </Button>
+        </div>
+      )}
+
+      <div className="rounded-md border overflow-auto">
+        <Table className="min-w-full">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -149,6 +179,24 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
+      
+      {/* Enhanced help section */}
+      <div className="flex items-center justify-between text-xs text-muted-foreground bg-accent/20 px-3 py-2 rounded-lg border">
+        <div className="flex items-center gap-4">
+          <span className="flex items-center gap-1">
+            <span className="w-2 h-2 bg-primary rounded-full"></span>
+            Use column dropdowns to add multiple sorts
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+            Numbers show sort priority
+          </span>
+        </div>
+        <span className="text-muted-foreground/70">
+          {table.getRowModel().rows.length} of {data.length} rows shown
+        </span>
+      </div>
+      
       <DataTablePagination table={table} />
     </div>
   );

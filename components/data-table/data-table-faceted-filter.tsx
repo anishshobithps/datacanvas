@@ -1,7 +1,7 @@
 "use client";
+
 import type { Column } from "@tanstack/react-table";
 import { PlusCircleIcon } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -79,7 +79,10 @@ export function DataTableFacetedFilter<TData, TValue>({
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0" align="start">
+      <PopoverContent
+        className="w-[90vw] max-w-xs sm:w-[200px] p-0"
+        align="start"
+      >
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
